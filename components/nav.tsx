@@ -31,9 +31,9 @@ type NavigationItemProperties = {
 };
 
 /**
- * Navigation component (`<nav />`) with navigable items and optional 
+ * Navigation component (`<nav />`) with navigable items and optional
  * artifacts, including a title.
- * 
+ *
  * @param properties Options for configuring the navigation component.
  * @returns A <nav /> HTML element with navigable items.
  */
@@ -41,12 +41,13 @@ function NavigationComponent(properties: NavigationProperties) {
 	return (
 		<nav>
 			{properties.title &&
-				<header>
-					<span>
-						{properties.title}
-					</span>
-				</header>
-			}
+				(
+					<header>
+						<span>
+							{properties.title}
+						</span>
+					</header>
+				)}
 			<ul>
 				{properties.items.map((navItem) => {
 					return NavigationItem(navItem);
@@ -58,9 +59,9 @@ function NavigationComponent(properties: NavigationProperties) {
 
 /**
  * Navigable item in the navigation element, structured around a list item (`<li />`).
- * 
+ *
  * @param properties Options to configure the navigable list item.
- * @returns 
+ * @returns
  */
 function NavigationItem(properties: NavigationItemProperties) {
 	return (
@@ -72,8 +73,8 @@ function NavigationItem(properties: NavigationItemProperties) {
 	);
 }
 
-export { 
-	NavigationComponent, 
+export {
+	NavigationComponent,
+	type NavigationItemProperties,
 	type NavigationProperties,
-	type NavigationItemProperties
 };

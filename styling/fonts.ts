@@ -9,7 +9,7 @@ interface FontResource {
 	/**
 	 * Local path for the font.
 	 */
-	path?: string;	
+	path?: string;
 	/**
 	 * Hash of the font.
 	 */
@@ -27,7 +27,7 @@ class FontsCache {
 
 	/**
 	 * Appends a font to the cache.
-	 * 
+	 *
 	 * @param font Font to append to the cache.
 	 */
 	append(font: FontResource) {
@@ -35,4 +35,4 @@ class FontsCache {
 	}
 }
 
-export { FontsCache, type FontResource };
+export { type FontResource, FontsCache };

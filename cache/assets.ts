@@ -1,7 +1,7 @@
 import SpritesCache from '../graphics/sprites.ts';
 
 /**
- * Structure for the assets cache. 
+ * Structure for the assets cache.
  */
 interface AssetsCache {
 	/**

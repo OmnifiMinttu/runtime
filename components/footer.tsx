@@ -18,7 +18,7 @@ type FooterProperties = {
 
 /**
  * Footer component for an application, containing navigation elements and a header banner.
- * 
+ *
  * @param properties Properties of the footer component.
  * @returns A HTML footer element.
  */
@@ -26,22 +26,25 @@ function FooterComponent(properties: FooterProperties) {
 	return (
 		<footer>
 			{properties.header &&
-				<HeaderComponent logo={properties.header.logo} title={properties.header.title} />
-			}
-			
+				(
+					<HeaderComponent
+						logo={properties.header.logo}
+						title={properties.header.title}
+					/>
+				)}
+
 			{properties.navigation.map((navigationSection) => {
-				return <NavigationComponent
-					title={navigationSection.title}
-					items={navigationSection.items}
-				/>
+				return (
+					<NavigationComponent
+						title={navigationSection.title}
+						items={navigationSection.items}
+					/>
+				);
 			})}
 		</footer>
 	);
 }
 
-export {
-	type FooterProperties,
-	FooterComponent
-}
+export { FooterComponent, type FooterProperties };
 
 export default FooterComponent;

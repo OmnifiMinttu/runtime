@@ -1,9 +1,9 @@
 import { DOMParser } from 'deno-dom/deno-dom-wasm.ts';
 
 /**
- * Load an SVG file and returns its contents as a sequence of SVG elements for the 
+ * Load an SVG file and returns its contents as a sequence of SVG elements for the
  * purpose of constructing spritesheets.
- * 
+ *
  * @param path Path of the SVG file.
  * @returns A string of XML representing the SVG file's elements.
  */

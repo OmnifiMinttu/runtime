@@ -1,4 +1,1 @@
-export { 
-    type Navigation, 
-    type NavigationItem 
-} from './navigation.ts';
+export { type Navigation, type NavigationItem } from './navigation.ts';

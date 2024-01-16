@@ -17,9 +17,9 @@ class AssetState {
 
 	/**
 	 * Generates an "integrity" attribute property for an asset.
-	 * 
+	 *
 	 * @param path Path where the asset should be found, within the "static" folder of the application.
-	 * 
+	 *
 	 * @returns The integrity reference (hash) of the asset.
 	 */
 	static integrity(path: string): string {
@@ -44,9 +44,9 @@ class AssetState {
 
 	/**
 	 * Hashes a string.
-	 * 
+	 *
 	 * @param content Content to hash.
-	 * 
+	 *
 	 * @returns Hash of the content.
 	 */
 	static async hashString(content: string): Promise<string> {

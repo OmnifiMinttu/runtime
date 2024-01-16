@@ -5,10 +5,10 @@ import App from '../routes/_app.tsx';
 import Layout from '../routes/_layout.tsx';
 
 /**
- * App routes plugin provides templated routing to the core `_app` and `_layout` 
- * from the Fresh project structure to reduce duplication in apps that share the 
+ * App routes plugin provides templated routing to the core `_app` and `_layout`
+ * from the Fresh project structure to reduce duplication in apps that share the
  * same base structure.
- * 
+ *
  * @returns A Fresh plugin routing to core components.
  */
 function appRoutesPlugin(): Plugin {
@@ -28,9 +28,9 @@ function appRoutesPlugin(): Plugin {
 }
 
 /**
- * Error routes plugin provides templated routing to standard error pages to reduce 
+ * Error routes plugin provides templated routing to standard error pages to reduce
  * boilerplating.
- * 
+ *
  * @returns A Fresh plugin routing to error pages.
  */
 function errorRoutesPlugin(): Plugin {

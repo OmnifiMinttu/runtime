@@ -35,7 +35,7 @@ class StylesCache {
 
 	/**
 	 * Appends a stylesheet to the cache.
-	 * 
+	 *
 	 * @param stylesheet Stylesheet to be cached.
 	 */
 	append(stylesheet: Stylesheet) {

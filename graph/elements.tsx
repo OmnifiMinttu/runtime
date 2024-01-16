@@ -22,7 +22,7 @@ type MetaGraphProperties = {
 
 /**
  * A social graph component for the meta properties in the head section of a page.
- * 
+ *
  * @param properties Meta graph properties to configure the head section.
  * @returns Meta properties for the head section of a page.
  */
@@ -30,7 +30,7 @@ function MetaGraphComponent(properties: MetaGraphProperties) {
 	const { description, image, title, url } = properties;
 
 	return (
-        <>
+		<>
 			{/* Facebook Meta Tags */}
 			<meta property='og:url' content={url.href} />
 			<meta property='og:type' content='website' />
@@ -45,11 +45,8 @@ function MetaGraphComponent(properties: MetaGraphProperties) {
 			<meta name='twitter:title' content={title} />
 			<meta name='twitter:description' content={description} />
 			{image && <meta name='twitter:image' content={image} />}
-        </>
+		</>
 	);
 }
 
-export {
-	type MetaGraphProperties,
-	MetaGraphComponent
-}
+export { MetaGraphComponent, type MetaGraphProperties };

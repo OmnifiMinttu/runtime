@@ -3,34 +3,31 @@
  * an application.
  */
 interface Navigation {
-    sections: Record<string, NavigationItem[]>
+	sections: Record<string, NavigationItem[]>;
 }
 
 /**
- * Navigable item, including sub-items. 
+ * Navigable item, including sub-items.
  */
 interface NavigationItem {
-    /**
-     * Destination of the navigable item.
-     */
-    href?: string;
-    /**
-     * Unique key for the navigation item.
-     */
+	/**
+	 * Destination of the navigable item.
+	 */
+	href?: string;
+	/**
+	 * Unique key for the navigation item.
+	 */
 	key: string;
-    /**
-     * Title of the navigation item.
-     */
+	/**
+	 * Title of the navigation item.
+	 */
 	title: string;
-    /**
-     * Sub-items of the navigation item.
-     */
-    items?: NavigationItem[];
+	/**
+	 * Sub-items of the navigation item.
+	 */
+	items?: NavigationItem[];
 }
 
 export default Navigation;
 
-export {
-    type Navigation,
-    type NavigationItem
-}
+export { type Navigation, type NavigationItem };

@@ -2,8 +2,8 @@ import { JSX } from 'preact';
 import { IS_BROWSER } from '$fresh/runtime.ts';
 
 /**
- * Basic button control. 
- * 
+ * Basic button control.
+ *
  * @param properties HTML attributes for the button element (`<button />`).
  * @returns A button HTML element.
  */

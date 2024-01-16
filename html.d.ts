@@ -1,11 +1,12 @@
 export {};
 
-declare global {
+// deno-lint-ignore no-unused-vars
+import { JSX } from 'preact';
+
+declare module 'preact' {
 	namespace JSX {
-		interface IntrinsicElements {
-			link: {
-				color?: string
-			}
+		interface DOMAttributes<Target extends EventTarget> {
+			color?: string;
 		}
 	}
 }

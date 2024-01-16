@@ -3,10 +3,10 @@ import { HeadComponent } from '../components/head.tsx';
 
 /**
  * Basic error page for pages that cannot be found.
- * 
+ *
  * @param _request HTTP request object.
  * @param context Fresh context.
- * 
+ *
  * @returns HTML for the 404 HTML page.
  */
 // deno-lint-ignore require-await

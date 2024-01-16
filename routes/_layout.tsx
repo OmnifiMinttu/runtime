@@ -1,49 +1,56 @@
 import { FreshContext } from '$fresh/server.ts';
 import ApplicationMiddleware from '../application/middleware.ts';
 import { FooterComponent } from '../components/footer.tsx';
-import { HeaderComponent, HeaderLogoProperties } from '../components/header.tsx';
-import { NavigationComponent, NavigationItemProperties, NavigationProperties } from '../components/nav.tsx';
+import {
+	HeaderComponent,
+	HeaderLogoProperties,
+} from '../components/header.tsx';
+import {
+	NavigationComponent,
+	NavigationItemProperties,
+	NavigationProperties,
+} from '../components/nav.tsx';
 
 /**
- * Provides the basic layout for each page as default. 
- * 
+ * Provides the basic layout for each page as default.
+ *
  * @param _request HTTP request object.
  * @param context Fresh context.
- * 
+ *
  * @returns HTML for the layout of the page.
  */
 async function Layout(_request: Request, context: FreshContext) {
 	const application = await ApplicationMiddleware.instance();
 	const primaryNavigation = await application.navigation.sections['primary'];
 
-	const navigationItems = primaryNavigation.map(navigationItem => {
+	const navigationItems = primaryNavigation.map((navigationItem) => {
 		return {
 			href: navigationItem.href ?? '',
 			key: navigationItem.key,
-			title: navigationItem.title
-		}
-	});
-
-	const footerNavProperties: NavigationProperties[] = application.navigation.sections['footer'].map(navigationItem => {
-
-		let subItems: NavigationItemProperties[] = [];
-
-		if (navigationItem.items) {
-			subItems = navigationItem.items.map(navigationItem => {
-				return {
-					href: navigationItem.href ?? '',
-					key: navigationItem.key,
-					title: navigationItem.title
-				}
-			});
-		}
-
-		return {
 			title: navigationItem.title,
-			key: navigationItem.key,
-			items: subItems
-		}
+		};
 	});
+
+	const footerNavProperties: NavigationProperties[] = application.navigation
+		.sections['footer'].map((navigationItem) => {
+			let subItems: NavigationItemProperties[] = [];
+
+			if (navigationItem.items) {
+				subItems = navigationItem.items.map((navigationItem) => {
+					return {
+						href: navigationItem.href ?? '',
+						key: navigationItem.key,
+						title: navigationItem.title,
+					};
+				});
+			}
+
+			return {
+				title: navigationItem.title,
+				key: navigationItem.key,
+				items: subItems,
+			};
+		});
 
 	const title = application.title;
 	const logo = application.logo;
@@ -53,10 +60,10 @@ async function Layout(_request: Request, context: FreshContext) {
 			href: logo.href,
 			url: logo.url,
 			content: logo.content,
-			dimensions: logo.dimensions
+			dimensions: logo.dimensions,
 		},
-		title: title
-	}
+		title: title,
+	};
 
 	return (
 		<>
@@ -79,6 +86,4 @@ async function Layout(_request: Request, context: FreshContext) {
 
 export default Layout;
 
-export {
-	Layout
-}
+export { Layout };

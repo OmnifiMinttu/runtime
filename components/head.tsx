@@ -1,4 +1,3 @@
-/// <reference types='../html.d.ts' />
 import { asset, Head } from '$fresh/runtime.ts';
 import { MetaGraphComponent } from '../graph/elements.tsx';
 import { Styles } from '../styling/elements.tsx';
@@ -26,8 +25,8 @@ type HeadProperties = {
 };
 
 /**
- * Head component for the meta information in each page. 
- * 
+ * Head component for the meta information in each page.
+ *
  * @param properties Options used to set the head component.
  * @returns The head component.
  */
@@ -65,7 +64,8 @@ function HeadComponent(properties: HeadProperties) {
 				description={description}
 				image={image}
 				title={title}
-				url={url} />
+				url={url}
+			/>
 
 			<Styles />
 
@@ -74,9 +74,6 @@ function HeadComponent(properties: HeadProperties) {
 	);
 }
 
-export {
-	type HeadProperties, 
-	HeadComponent
-}
+export { HeadComponent, type HeadProperties };
 
 export default HeadComponent;

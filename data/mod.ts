@@ -1,1 +1,1 @@
-export { type DataSyncSubscriber, DataManager } from './manager.ts';
+export { DataManager, type DataSyncSubscriber } from './manager.ts';

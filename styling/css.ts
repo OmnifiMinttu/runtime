@@ -26,7 +26,7 @@ const __dirname = resolve();
  */
 const targets = browserslistToTargets(
 	browserslist(
-		'>= 0.25%' //5%, last 2 versions, Firefox >= 102, Firefox ESR, not dead',
+		'>= 0.25%', //5%, last 2 versions, Firefox >= 102, Firefox ESR, not dead',
 	),
 );
 
@@ -69,9 +69,9 @@ type CSSBuilderOptions = {
 	 */
 	outPath: string;
 	/**
-	 * Apply transformations with Lightning CSS. 
-	 * 
-	 * Warning: this does not work with all CSS due to parsing issues in the WebAssembly encoding, 
+	 * Apply transformations with Lightning CSS.
+	 *
+	 * Warning: this does not work with all CSS due to parsing issues in the WebAssembly encoding,
 	 * so this is not currently used.
 	 */
 	transform?: boolean;
@@ -93,7 +93,7 @@ class CSSBuilder {
 
 	/**
 	 * Provides the singleton instance of the CSS builder.
-	 * 
+	 *
 	 * @returns An instance of the CSS builder.
 	 */
 	static instance(): CSSBuilder {
@@ -105,8 +105,8 @@ class CSSBuilder {
 	}
 
 	/**
-	 * Generates a default set of options to be used for a project. 
-	 * 
+	 * Generates a default set of options to be used for a project.
+	 *
 	 * @returns Default set of CSS options (`CSSBuilderOptions`).
 	 */
 	static defaultOptions(): CSSBuilderOptions {
@@ -125,13 +125,13 @@ class CSSBuilder {
 			outPath: '_styles/css/',
 			transform: false,
 			artifactExtensions: [
-				".png",
-				".jpg",
-				".jpeg",
-				".svg",
-				".gif"
-			]
-		}
+				'.png',
+				'.jpg',
+				'.jpeg',
+				'.svg',
+				'.gif',
+			],
+		};
 	}
 
 	/**
@@ -145,23 +145,23 @@ class CSSBuilder {
 	#workingPath = './';
 
 	/**
-	 * Instantiates a new `CSSBuilder` instance. 
-	 * 
+	 * Instantiates a new `CSSBuilder` instance.
+	 *
 	 * @param options Optional set of options to be used when building. If none are provided then
 	 * the default set are used.
 	 */
 	constructor(options?: CSSBuilderOptions) {
-		this.options = (options) ? options : CSSBuilder.defaultOptions();
+		this.options = options ? options : CSSBuilder.defaultOptions();
 	}
 
 	/**
 	 * Builds the CSS styling for the several CSS inputs.
-	 * 
+	 *
 	 * @param entryPoints Entry points to build from.
 	 */
 	async buildStyles(entryPoints: string[]) {
 		await entryPoints.forEach((path) => {
-			this.buildStyle(resolve(this.#workingPath, basename(path))); 
+			this.buildStyle(resolve(this.#workingPath, basename(path)));
 		});
 
 		if (this.options.artifactExtensions) {
@@ -171,7 +171,7 @@ class CSSBuilder {
 
 	/**
 	 * Builds the CSS stylign for a single CSS file, and any imports it has.
-	 * 
+	 *
 	 * @param path Path of the CSS file to start with.
 	 */
 	async buildStyle(path: string) {
@@ -180,12 +180,12 @@ class CSSBuilder {
 		try {
 			const sourceCSS = await Deno.readTextFile(path);
 
-			const outputCSS = (this.options.transform === true) ?
-				await this.#transformStyle(path, sourceCSS) : 
-				sourceCSS;
+			const outputCSS = (this.options.transform === true)
+				? await this.#transformStyle(path, sourceCSS)
+				: sourceCSS;
 
 			const outputDir = this.options.outPath;
-			const outputPath = resolve(outputDir, `${fileName}.min.css`);	
+			const outputPath = resolve(outputDir, `${fileName}.min.css`);
 
 			try {
 				await Deno.mkdir(outputDir, { recursive: true });
@@ -210,17 +210,26 @@ class CSSBuilder {
 
 	/**
 	 * Copies the artifacts from the source project into the destination.
-	 * 
+	 *
 	 * @param path Path where to search for artifacts.
 	 */
 	async copyArtifacts(path: string) {
 		const directory = await Deno.readDir(path);
 
 		for await (const subPath of directory) {
-			if ((subPath.isFile) && (this.options.artifactExtensions?.includes(extname(subPath.name)))) {
-				copy(resolve(path, subPath.name), resolve(this.options.outPath, subPath.name), {
-					overwrite: true
-				});
+			if (
+				(subPath.isFile) &&
+				(this.options.artifactExtensions?.includes(
+					extname(subPath.name),
+				))
+			) {
+				copy(
+					resolve(path, subPath.name),
+					resolve(this.options.outPath, subPath.name),
+					{
+						overwrite: true,
+					},
+				);
 			}
 		}
 	}
@@ -238,11 +247,11 @@ class CSSBuilder {
 				external: this.options.external,
 				minifyWhitespace: true,
 				loader: {
-					".png": "file",
-					".jpg": "copy",
-					".jpeg": "file",
-					".svg": "file",
-					".gif": "file",
+					'.png': 'file',
+					'.jpg': 'copy',
+					'.jpeg': 'file',
+					'.svg': 'file',
+					'.gif': 'file',
 				},
 			});
 		} catch (error: unknown) {
@@ -252,7 +261,7 @@ class CSSBuilder {
 
 	/**
 	 * Builds the CSS at a given location.
-	 * 
+	 *
 	 * @param path Path of the CSS to begin building.
 	 */
 	async build(path?: string) {
@@ -284,10 +293,10 @@ class CSSBuilder {
 
 	/**
 	 * Transforms CSS using a given set of rules, using LightningCSS.
-	 * 
+	 *
 	 * @param path File to begin transforming.
 	 * @param sourceCSS Source CSS to transform.
-	 * 
+	 *
 	 * @returns Transformed CSS.
 	 */
 	async #transformStyle(path: string, sourceCSS: string) {
@@ -296,7 +305,7 @@ class CSSBuilder {
 			code: new TextEncoder().encode(sourceCSS),
 			minify: true,
 			targets,
-			errorRecovery: true
+			errorRecovery: true,
 		});
 
 		const decoder = new TextDecoder();
@@ -306,19 +315,19 @@ class CSSBuilder {
 	}
 
 	/**
-	 * Debounces the update of styles. In the event an update is called before 
+	 * Debounces the update of styles. In the event an update is called before
 	 * this is complete, the secondary update does not run.
 	 */
 	#debouncedUpdateStyles = debounce(
 		async (path: string) => {
 			await this.#updateStyles(path);
 		},
-		200
+		200,
 	);
 
 	/**
 	 * Updates the styles.
-	 * 
+	 *
 	 * @param path Entrypoint for the update.
 	 */
 	async #updateStyles(path: string) {
@@ -333,7 +342,4 @@ class CSSBuilder {
 
 //main();
 
-export { 
-	type CSSBuilderOptions,
-	CSSBuilder 
-};
+export { CSSBuilder, type CSSBuilderOptions };

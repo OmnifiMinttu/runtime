@@ -1,7 +1,7 @@
 export { type Content } from './content.ts';
 export {
+	BaseContentManager,
 	type ContentManager,
 	type ContentStamp,
-	BaseContentManager,
-	PageManager
-} from './manager.ts'
+	PageManager,
+} from './manager.ts';

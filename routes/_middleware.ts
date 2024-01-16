@@ -3,7 +3,7 @@ import EnvironmentMiddleware from '../environment/middleware.ts';
 
 import { signal } from '@preact/signals';
 
-const pageMatter = signal<string>('');//signal<{ [key: string]: string }>({});
+const pageMatter = signal<string>(''); //signal<{ [key: string]: string }>({});
 
 const handler = [
 	cacheControlHandler,

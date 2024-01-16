@@ -30,8 +30,8 @@ class SpritesCache {
 
 	/**
 	 * Provides singleton instance of the sprite cache.
-	 * 
-	 * @returns 
+	 *
+	 * @returns
 	 */
 	static instance() {
 		if (!this.#instance) {
@@ -43,7 +43,7 @@ class SpritesCache {
 
 	/**
 	 * Builds a spritesheet from the list of sprites available.
-	 * 
+	 *
 	 * @returns Compiled spritesheet.
 	 */
 	// deno-lint-ignore require-await
@@ -66,7 +66,7 @@ class SpritesCache {
 
 	/**
 	 * Appends a new sprite from a given URL into the sprite cache.
-	 * 
+	 *
 	 * @param url URL of the sprite (SVG) to append.
 	 */
 	async appendFromURL(url: URL) {
@@ -103,9 +103,9 @@ class SpritesCache {
 
 	/**
 	 * Appends a sprite to the sprite cache from the content (SVG XML).
-	 * 
+	 *
 	 * @param content SVG XML of the sprite to append.
-	 * 
+	 *
 	 * @returns New spritesheet with appended sprite.
 	 */
 	appendContent(content: string): string {
@@ -116,9 +116,9 @@ class SpritesCache {
 
 	/**
 	 * Append an SVG sprite from a local file.
-	 * 
+	 *
 	 * @param path Path where the SVG is located.
-	 * 
+	 *
 	 * @returns Updated spritesheet with new SVG appended.
 	 */
 	async appendSVGFromFile(path: string): Promise<string> {
@@ -130,9 +130,9 @@ class SpritesCache {
 
 	/**
 	 * Loads an SVG's contents from a given path.
-	 * 
+	 *
 	 * @param path Path where the SVG can be found.
-	 * 
+	 *
 	 * @returns The body of the SVG file.
 	 */
 	async svgFromFile(path: string): Promise<string> {

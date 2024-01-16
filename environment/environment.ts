@@ -7,6 +7,4 @@ interface Environment {
 
 export default Environment;
 
-export {
-    type Environment
-}
+export { type Environment };

@@ -4,14 +4,14 @@ import SpritesCache from '../graphics/sprites.ts';
 import State from '../state/state.ts';
 
 /**
- * Provides the management layer for handling assets, including images, during the 
+ * Provides the management layer for handling assets, including images, during the
  * application's execution.
  */
 class AssetsMiddleware {
 	/**
 	 * The singleton instance of the assets middleware. If this has not been instantiated
-	 * yet it will be on the first request. 
-	 * 
+	 * yet it will be on the first request.
+	 *
 	 * @returns The instance of the assets middleware.
 	 */
 	public static instance() {
@@ -30,17 +30,20 @@ class AssetsMiddleware {
 	/**
 	 * The singleton instance for the assets middleware.
 	 */
-	static #instance: AssetsMiddleware;	
+	static #instance: AssetsMiddleware;
 }
 
 /**
- * Handler for setting the cache control on various assets. 
- * 
+ * Handler for setting the cache control on various assets.
+ *
  * @param _request HTTP request object.
  * @param context Fresh context.
  * @returns HTTP response object.
  */
-async function cacheControlHandler(_request: Request, context: FreshContext<State>) {
+async function cacheControlHandler(
+	_request: Request,
+	context: FreshContext<State>,
+) {
 	context.state.environment = EnvironmentMiddleware.instance();
 
 	if (context.destination === 'route') {
