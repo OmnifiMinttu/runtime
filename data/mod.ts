@@ -1,0 +1,1 @@
+export { type DataSyncSubscriber, DataManager } from './manager.ts';

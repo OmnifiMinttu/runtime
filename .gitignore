@@ -1,0 +1,11 @@
+# Build artifacts
+lib/
+static/css/
+_styles/
+_fresh/
+
+# Dependency artifacts
+node_modules/
+
+# Development tools
+.vscode/
