@@ -1,6 +1,4 @@
-import DataManager, {
-	DataSyncSubscriber,
-} from '../data/manager.ts';
+import DataManager, { DataSyncSubscriber } from '../data/manager.ts';
 import { SyncRule } from '../data/manager.ts';
 import { EnvironmentMiddleware } from '../environment/mod.ts';
 import AssetsController from '../cache/controller.ts';

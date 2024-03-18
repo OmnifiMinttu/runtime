@@ -6,10 +6,6 @@ export {
 	preload,
 	type PreloadOptions,
 	type SyncRuleRequest,
-
 } from './lifecycle/mod.ts';
 
-export {
-	type DataSyncSubscriber,
-	type SyncRule
-} from './data/mod.ts'
+export { type DataSyncSubscriber, type SyncRule } from './data/mod.ts';
