@@ -1,4 +1,4 @@
-import AssetsMiddleware, { cacheControlHandler } from '../cache/middleware.ts';
+import AssetsController, { cacheControlHandler } from '../cache/controller.ts';
 import EnvironmentMiddleware from '../environment/middleware.ts';
 
 import { signal } from '@preact/signals';
@@ -10,6 +10,6 @@ const handler = [
 ];
 
 const initEnvironmentMiddleware = () => EnvironmentMiddleware.instance();
-const initCacheMiddleware = () => AssetsMiddleware.instance();
+const initCacheMiddleware = () => AssetsController.instance();
 
 export { handler, initCacheMiddleware, initEnvironmentMiddleware, pageMatter };

@@ -3,6 +3,9 @@
  * an application.
  */
 interface Navigation {
+	/**
+	 * Navigation sections.
+	 */
 	sections: Record<string, NavigationItem[]>;
 }
 

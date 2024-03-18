@@ -1,3 +1,4 @@
+import { useContext } from 'preact/hooks';
 import { HeaderComponent, HeaderProperties } from './header.tsx';
 import { NavigationComponent, NavigationProperties } from './nav.tsx';
 
@@ -25,6 +26,8 @@ type FooterProperties = {
 function FooterComponent(properties: FooterProperties) {
 	return (
 		<footer>
+			{properties.header?.title &&
+				<span>{properties.header?.title}</span>}
 			{properties.header &&
 				(
 					<HeaderComponent

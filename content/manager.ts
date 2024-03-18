@@ -1,6 +1,5 @@
 import { basename, dirname, extname, resolve } from '$std/path/mod.ts';
 import { Content } from './content.ts';
-import { DataManager } from '../data/mod.ts';
 import { extract } from '$std/front_matter/any.ts';
 import { ImageSourceMap, parseImageMap } from './image.ts';
 
@@ -17,7 +16,7 @@ interface ContentManager<KeyType, ContentType> {
 	/**
 	 * List of content, wrapped in a content stamp and referenced with a unique key.
 	 */
-	get list(): Map<KeyType, ContentStamp<ContentType>>;
+	get content(): Map<KeyType, ContentStamp<ContentType>>;
 }
 
 /**
@@ -33,7 +32,7 @@ abstract class BaseContentManager<KeyType, ContentType>
 	 * List of content. This is instantiated once and items are subsequently refreshed
 	 * afterwards.
 	 */
-	readonly #list: Map<KeyType, ContentStamp<ContentType>>;
+	readonly #content: Map<KeyType, ContentStamp<ContentType>>;
 
 	/**
 	 * List of paths to lookup for content.
@@ -46,15 +45,15 @@ abstract class BaseContentManager<KeyType, ContentType>
 	 * @param contentPaths List of paths (potentially relative) for loading the content.
 	 */
 	protected constructor(contentPaths: string[]) {
-		this.#list = new Map<KeyType, ContentStamp<ContentType>>();
+		this.#content = new Map<KeyType, ContentStamp<ContentType>>();
 		this.#contentPaths = contentPaths;
 	}
 
 	/**
 	 * Provides a readonly list of the content, wrapped in a content stamp.
 	 */
-	get list(): Map<KeyType, ContentStamp<ContentType>> {
-		return this.#list;
+	get content(): Map<KeyType, ContentStamp<ContentType>> {
+		return this.#content;
 	}
 
 	/**
@@ -64,11 +63,11 @@ abstract class BaseContentManager<KeyType, ContentType>
 		await this.#contentPaths.forEach(async (path) => {
 			const contentList = await this.getContentFromPath(path);
 
-			contentList.forEach((stamp, key) => {
-				this.#list.set(key, stamp);
+			await contentList.forEach((stamp, key) => {
+				this.#content.set(key, stamp);
 			});
 
-			this.loadDirectory(path);
+			await this.loadDirectory(path);
 		});
 	}
 
@@ -86,8 +85,8 @@ abstract class BaseContentManager<KeyType, ContentType>
 					resolve(path, pathItem.name),
 				);
 
-				contentList.forEach((stamp, key) => {
-					this.#list.set(key, stamp);
+				await contentList.forEach((stamp, key) => {
+					this.#content.set(key, stamp);
 				});
 			}
 		}
@@ -143,9 +142,9 @@ abstract class BaseContentManager<KeyType, ContentType>
 	 *
 	 * @param path Path where the content should be parsed.
 	 */
-	// deno-lint-ignore require-await no-unused-vars
+	// deno-lint-ignore require-await
 	protected async parseContent(
-		path: string,
+		_path: string,
 	): Promise<{ key: KeyType; stamp: ContentStamp<ContentType> }> {
 		throw new Error('parserContent not implemented');
 	}
@@ -154,42 +153,49 @@ abstract class BaseContentManager<KeyType, ContentType>
 /**
  * Manages generic page content from a given store.
  */
-class PageManager extends BaseContentManager<string, Content>
+class PagesManager extends BaseContentManager<string, Content>
 	implements ContentManager<string, Content> {
 	/**
-	 * Provides the singleton instance of the PageManager for the application. If this has
+	 * Provides the singleton instance of the PagesManager for the application. If this has
 	 * not been instantiated yet, it creates a new instance and returns that for the remaining
 	 * lifecycle of the application.
 	 *
 	 * @returns The singleton instance of the PageManager.
 	 */
-	static instance(): PageManager {
-		if (!PageManager.#instance) {
-			PageManager.#instance = new PageManager();
+	static get context(): PagesManager {
+		if (!PagesManager.#context) {
+			PagesManager.#context = new PagesManager();
 		}
 
-		return PageManager.#instance;
+		return PagesManager.#context;
+	}
+
+	/**
+	 * Fetches the pages for routing in the application.
+	 *
+	 * @returns A map of pages for given routes in the application.
+	 */
+	static async fetchPages(): Promise<Map<string, ContentStamp<Content>>> {
+		if (PagesManager.context.content.size === 0) {
+			PagesManager.context.setContentPaths(['./modules/content']);
+
+			await PagesManager.context.load();
+		}
+
+		return PagesManager.context.content;
 	}
 
 	/**
 	 * The singleton instance of the PageManager.
 	 */
-	static #instance: PageManager;
+	static #context: PagesManager;
 
 	/**
 	 * Instantiates a new PageManager and loads the content from the 'content' data store
 	 * using the DataManager. Page content is in the 'pages' subdirectory.
 	 */
 	private constructor() {
-		const dataManager = DataManager.instance();
-		const basePath = dataManager.getStoreSync('content');
-		const pagesPath = resolve(basePath, 'pages');
-
-		super([pagesPath]);
-
-		this.load().then((_resolve) => {
-			console.log('pages synchronised');
-		});
+		super([]);
 	}
 
 	/**
@@ -199,6 +205,12 @@ class PageManager extends BaseContentManager<string, Content>
 		await this.load();
 	}
 
+	/**
+	 * Parses the content at a given path from markdown.
+	 *
+	 * @param path Location of the markdown file.
+	 * @returns A content stamp (`ContentStamp<Content>`) for a given route.
+	 */
 	protected async parseContent(
 		path: string,
 	): Promise<{ key: string; stamp: ContentStamp<Content> }> {
@@ -216,7 +228,7 @@ class PageManager extends BaseContentManager<string, Content>
 			feature: attrs.feature as boolean,
 			title: attrs.title as string,
 			publishedAt: new Date(attrs.published_at as string),
-			content: body,
+			body: body,
 			snippet: attrs.snippet as string,
 			draft: attrs.draft as boolean,
 			summary: attrs.summary as string,
@@ -238,5 +250,5 @@ export {
 	BaseContentManager,
 	type ContentManager,
 	type ContentStamp,
-	PageManager,
+	PagesManager,
 };

@@ -1,5 +1,5 @@
 import { asset } from '$fresh/runtime.ts';
-import StylingMiddleware from './middleware.ts';
+import StylingContext from './context.ts';
 import { JSX } from 'preact';
 
 /**
@@ -8,13 +8,12 @@ import { JSX } from 'preact';
  * @returns HTML with the `<link>` elements and inline CSS.
  */
 function Styles() {
-	const styling = StylingMiddleware.instance();
-	const inlineStyles = styling.styles.list.filter((stylesheet) =>
-		stylesheet.inline === true && stylesheet.content !== null
-	);
-	const deferredStyles = styling.styles.list.filter((stylesheet) =>
-		stylesheet.inline !== true
-	);
+	const inlineStyles = StylingContext.instance().styles.list.filter((
+		stylesheet,
+	) => stylesheet.inline === true && stylesheet.content !== null);
+	const deferredStyles = StylingContext.instance().styles.list.filter((
+		stylesheet,
+	) => stylesheet.inline !== true);
 
 	const elements: JSX.Element[] = [];
 
@@ -47,7 +46,7 @@ function Styles() {
 		);
 	});
 
-	const fonts = styling.fonts.list;
+	const fonts = StylingContext.instance().fonts.list;
 
 	fonts.forEach((font) => {
 		const href = (font.url) ? font.url.toString() : font.path || '';

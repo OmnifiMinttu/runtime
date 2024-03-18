@@ -7,19 +7,19 @@ import State from '../state/state.ts';
  * Provides the management layer for handling assets, including images, during the
  * application's execution.
  */
-class AssetsMiddleware {
+class AssetsController {
 	/**
-	 * The singleton instance of the assets middleware. If this has not been instantiated
+	 * The singleton instance of the assets controller. If this has not been instantiated
 	 * yet it will be on the first request.
 	 *
-	 * @returns The instance of the assets middleware.
+	 * @returns The instance of the assets controller.
 	 */
-	public static instance() {
-		if (!AssetsMiddleware.#instance) {
-			AssetsMiddleware.#instance = new AssetsMiddleware();
+	public static instance(): AssetsController {
+		if (!AssetsController.#instance) {
+			AssetsController.#instance = new AssetsController();
 		}
 
-		return AssetsMiddleware.#instance;
+		return AssetsController.#instance;
 	}
 
 	/**
@@ -28,9 +28,9 @@ class AssetsMiddleware {
 	sprites = new SpritesCache();
 
 	/**
-	 * The singleton instance for the assets middleware.
+	 * The singleton instance for the assets controller.
 	 */
-	static #instance: AssetsMiddleware;
+	static #instance: AssetsController;
 }
 
 /**
@@ -43,7 +43,7 @@ class AssetsMiddleware {
 async function cacheControlHandler(
 	_request: Request,
 	context: FreshContext<State>,
-) {
+): Promise<Response> {
 	context.state.environment = EnvironmentMiddleware.instance();
 
 	if (context.destination === 'route') {
@@ -58,6 +58,6 @@ async function cacheControlHandler(
 	return response;
 }
 
-export default AssetsMiddleware;
+export default AssetsController;
 
 export { cacheControlHandler };

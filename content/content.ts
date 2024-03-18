@@ -34,9 +34,9 @@ interface Content {
 	 */
 	publishedAt?: Date;
 	/**
-	 * Content of the page.
+	 * Body of the content.
 	 */
-	content: string;
+	body: string;
 	/**
 	 * Snippet to be presented in cards for the content.
 	 */
@@ -55,15 +55,15 @@ interface Content {
  * Create a simplified content structure.
  *
  * @param slug Slug (last component of the URL) for the content.
- * @param content Body of the content.
+ * @param body Body of the content.
  * @returns
  */
-const BasicContent = (slug: string, content: string): Content => {
+const BasicContent = (slug: string, body: string): Content => {
 	return {
 		title: '',
 		feature: false,
 		draft: false,
-		content: content,
+		body: body,
 		slug: slug,
 		summary: '',
 	};

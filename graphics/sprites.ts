@@ -31,9 +31,9 @@ class SpritesCache {
 	/**
 	 * Provides singleton instance of the sprite cache.
 	 *
-	 * @returns
+	 * @returns SpritesCache contenting the sprites stored in the current process.
 	 */
-	static instance() {
+	static instance(): SpritesCache {
 		if (!this.#instance) {
 			this.#instance = new SpritesCache();
 		}

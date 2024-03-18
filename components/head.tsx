@@ -1,6 +1,8 @@
 import { asset, Head } from '$fresh/runtime.ts';
 import { MetaGraphComponent } from '../graph/elements.tsx';
-import { Styles } from '../styling/elements.tsx';
+import { Styles } from '../styling/style-meta-links.tsx';
+import { IconMetaLinks } from '../icons/application/meta-link.tsx';
+import { Icon } from '../icons/icon.ts';
 
 /**
  * Properties used to set the head component on each page.
@@ -22,6 +24,8 @@ type HeadProperties = {
 	 * Image used to represent the page in graphs.
 	 */
 	image?: string;
+
+	icons?: Icon[];
 };
 
 /**
@@ -31,24 +35,14 @@ type HeadProperties = {
  * @returns The head component.
  */
 function HeadComponent(properties: HeadProperties) {
-	const { description, image, title, url } = properties;
+	const { description, image, title, url, icons } = properties;
 
 	return (
 		<Head>
 			<title>{title}</title>
 
-			<link
-				rel='icon'
-				href={asset('images/vectors/brand/mask-icon.svg')}
-				type='image/svg+xml'
-			/>
+			<IconMetaLinks />
 
-			<link
-				color='#5bbad5'
-				rel='mask-icon'
-				href={asset('images/vectors/brand/mask-icon.svg')}
-				type='image/svg+xml'
-			/>
 			<meta name='theme-color' content='#d7d7d7' />
 
 			<link

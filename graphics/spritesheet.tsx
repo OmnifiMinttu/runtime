@@ -1,4 +1,4 @@
-import AssetsMiddleware from '../cache/middleware.ts';
+import AssetsController from '../cache/controller.ts';
 import SpritesCache from './sprites.ts';
 
 /**
@@ -18,7 +18,7 @@ function Spritesheet() {
 /**
  * Assets cache which contains the sprite cache.
  */
-const cache = AssetsMiddleware.instance();
+const cache = AssetsController.instance();
 await cache.sprites.build();
 
 export default Spritesheet;

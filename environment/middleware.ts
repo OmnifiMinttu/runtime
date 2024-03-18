@@ -20,7 +20,7 @@ class EnvironmentMiddleware implements Environment {
 	 *
 	 * @returns The singleton instance of the environment middleware.
 	 */
-	public static instance() {
+	public static instance(): Environment {
 		if (!EnvironmentMiddleware.#context) {
 			EnvironmentMiddleware.#context = new EnvironmentMiddleware();
 		}

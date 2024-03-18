@@ -1,5 +1,5 @@
 import { FreshContext } from '$fresh/server.ts';
-import ApplicationMiddleware from '../application/middleware.ts';
+import ApplicationController from '../application/controller.ts';
 import { FooterComponent } from '../components/footer.tsx';
 import {
 	HeaderComponent,
@@ -11,6 +11,8 @@ import {
 	NavigationProperties,
 } from '../components/nav.tsx';
 
+import { NavigationState } from '../navigation/state.ts';
+
 /**
  * Provides the basic layout for each page as default.
  *
@@ -20,8 +22,9 @@ import {
  * @returns HTML for the layout of the page.
  */
 async function Layout(_request: Request, context: FreshContext) {
-	const application = await ApplicationMiddleware.instance();
-	const primaryNavigation = await application.navigation.sections['primary'];
+	const application = await ApplicationController.context;
+	const navigation = await NavigationState.fetchNavigation();
+	const primaryNavigation = navigation.sections['primary'];
 
 	const navigationItems = primaryNavigation.map((navigationItem) => {
 		return {
@@ -31,7 +34,7 @@ async function Layout(_request: Request, context: FreshContext) {
 		};
 	});
 
-	const footerNavProperties: NavigationProperties[] = application.navigation
+	const footerNavProperties: NavigationProperties[] = navigation
 		.sections['footer'].map((navigationItem) => {
 			let subItems: NavigationItemProperties[] = [];
 

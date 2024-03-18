@@ -7,16 +7,6 @@ import { build as esbuild } from 'esbuild/mod.js';
 import init, { browserslistToTargets, transform } from 'lightningcss';
 
 /**
- * Source list of CSS files to render.
- */
-const sourceList = [
-	'css/base.css',
-	'css/components.css',
-	'css/handheld.css',
-	'css/screen.css',
-];
-
-/**
  * Base directory.
  */
 const __dirname = resolve();
@@ -34,6 +24,7 @@ const targets = browserslistToTargets(
  * Entry point for building the CSS on the command-line interface. This is currently
  * unused, but kept for reference for future changes.
  */
+// deno-lint-ignore no-unused-vars
 async function main() {
 	const builder = new CSSBuilder();
 	await builder.build();

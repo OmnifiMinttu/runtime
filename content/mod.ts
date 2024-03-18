@@ -3,5 +3,5 @@ export {
 	BaseContentManager,
 	type ContentManager,
 	type ContentStamp,
-	PageManager,
+	PagesManager,
 } from './manager.ts';

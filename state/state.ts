@@ -8,6 +8,7 @@ interface State {
 	 * Environment state.
 	 */
 	environment: Environment;
+
 	/**
 	 * State data.
 	 */

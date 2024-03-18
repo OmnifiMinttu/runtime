@@ -1,28 +1,28 @@
-import { FontsCache } from './fonts.ts';
-import { StylesCache } from './styles.ts';
+import { FontsCache } from './fonts/fonts.ts';
+import { StylesCache } from './css/styles.ts';
 
 /**
  * Handles the styling logic for the application, including caching styling
  * assets such as CSS and fonts.
  */
-class StylingMiddleware {
+class StylingContext {
 	/**
 	 * Provides a singleton instance of the styling middleware.
 	 *
 	 * @returns Singleton instance of the styling middleware.
 	 */
 	static instance() {
-		if (!StylingMiddleware.#context) {
-			StylingMiddleware.#context = new StylingMiddleware();
+		if (!StylingContext.#context) {
+			StylingContext.#context = new StylingContext();
 		}
 
-		return StylingMiddleware.#context;
+		return StylingContext.#context;
 	}
 
 	/**
 	 * Instance of the styling middleware.
 	 */
-	static #context: StylingMiddleware;
+	static #context: StylingContext;
 
 	/**
 	 * Fonts cache.
@@ -35,4 +35,4 @@ class StylingMiddleware {
 	styles = new StylesCache();
 }
 
-export default StylingMiddleware;
+export default StylingContext;

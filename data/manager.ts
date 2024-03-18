@@ -55,7 +55,7 @@ class DataManager {
 	 *
 	 * @returns An instance of the DataManager.
 	 */
-	static instance() {
+	static instance(): DataManager {
 		if (!DataManager.#instance) {
 			DataManager.#instance = new DataManager();
 		}
@@ -89,18 +89,18 @@ class DataManager {
 	addSyncRule = async (
 		name: string,
 		rule: SyncRule,
-		subscriber: DataSyncSubscriber,
+		subscriber?: DataSyncSubscriber,
 	) => {
 		const watcher = Deno.watchFs(rule.sourcePath, { recursive: true });
 
 		this.#syncWatches[name] = { rule: rule, watcher: watcher };
 
 		await this.#syncStore(name);
-		await subscriber.updated();
+		await subscriber?.updated();
 
 		for await (const _event of watcher) {
-			this.#syncStore(name);
-			subscriber.updated();
+			await this.#syncStore(name);
+			await subscriber?.updated();
 		}
 	};
 
@@ -176,7 +176,8 @@ class DataManager {
 			}
 		}
 
-		await copy(this.#syncWatches[name].rule.sourcePath, destination, {
+		const source = resolve(this.#syncWatches[name].rule.sourcePath);
+		await copy(source, destination, {
 			overwrite: true,
 		});
 	};
@@ -184,4 +185,4 @@ class DataManager {
 
 export default DataManager;
 
-export { DataManager, type DataSyncSubscriber };
+export { DataManager, type DataSyncSubscriber, type SyncRule };

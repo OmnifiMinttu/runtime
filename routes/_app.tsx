@@ -1,6 +1,6 @@
 import { FreshContext } from '$fresh/server.ts';
-import { Partial } from '$fresh/runtime.ts';
 import Spritesheet from '../graphics/spritesheet.tsx';
+import { ApplicationController } from '../application/controller.ts';
 
 /**
  * Core application wrapper for a Fresh application.

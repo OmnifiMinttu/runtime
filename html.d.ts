@@ -7,6 +7,7 @@ declare module 'preact' {
 	namespace JSX {
 		interface DOMAttributes<Target extends EventTarget> {
 			color?: string;
+			fetchpriority?: string;
 		}
 	}
 }
