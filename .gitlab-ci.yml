@@ -1,0 +1,37 @@
+workflow:
+    name: Deno testing
+
+default:               
+    image: deno
+
+.merge-rules:       
+    rules:
+        - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+        - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+stages:          
+    - check
+    - build
+    - test
+
+check:
+    stage: check
+    extends:
+        - .merge-rules 
+    script:
+        - deno doc --lint **/*.ts
+        - deno task check
+
+test-publish:
+    stage: build
+    extends:
+        - .merge-rules 
+    script:
+        - deno publish --dry-run # tests the that publish will work
+
+unit-tests:  
+    stage: test  
+    extends:
+        - .merge-rules   
+    script:
+        - deno test --parallel
