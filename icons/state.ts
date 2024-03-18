@@ -1,4 +1,4 @@
-import { applicationIconsPathVariable } from '@minttu/runtime/icons/environment.ts';
+import { applicationIconsPathVariable } from '../icons/environment.ts';
 import { Icon } from './icon.ts';
 import { IconsOptions } from './options.ts';
 

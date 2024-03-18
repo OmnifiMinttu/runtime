@@ -1,14 +1,22 @@
 {
+	"name": "@minttu/runtime",
+	"version": "0.0.0",
+	"exports": {
+		".": "./mod.ts"
+	},
 	"lock": false,
 	"tasks": {
 		"check": "deno fmt --check **/*.ts && deno fmt --check **/*.tsx && deno lint && deno check **/*.ts && deno check **/*.tsx",
-		"start": "deno run -A --watch=static/,routes/,components/ dev.ts",
-		"build": "deno run -A dev.ts build",
-		"preview": "deno run -A server.ts",
-		"update": "deno run -A -r https://fresh.deno.dev/update .",
-		"build:css": "deno run -A build/css.ts"
+		"check:docs": "deno doc --lint **/*.ts"
 	},
-	"lint": { "rules": { "tags": ["fresh", "recommended"] } },
+	"lint": {
+		"rules": {
+			"tags": [
+				"fresh",
+				"recommended"
+			]
+		}
+	},
 	"fmt": {
 		"useTabs": true,
 		"lineWidth": 80,
@@ -16,10 +24,19 @@
 		"semiColons": true,
 		"singleQuote": true,
 		"proseWrap": "preserve",
-		"include": ["./"],
-		"exclude": ["src/testdata/", "data/fixtures/**/*.ts", "node_modules"]
+		"include": [
+			"./"
+		],
+		"exclude": [
+			"src/testdata/",
+			"data/fixtures/**/*.ts",
+			"node_modules"
+		]
 	},
-	"exclude": ["**/_fresh/*", "node_modules/*"],
+	"exclude": [
+		"**/_fresh/*",
+		"node_modules/*"
+	],
 	"imports": {
 		"$std/": "https://deno.land/std@0.206.0/",
 		"$fresh/": "https://deno.land/x/fresh@1.6.1/",
@@ -34,5 +51,11 @@
 		"deno-dom/": "https://deno.land/x/deno_dom@v0.1.43/",
 		"lightningcss": "https://esm.sh/lightningcss-wasm@1.22.1"
 	},
-	"compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" }
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"jsxImportSource": "preact",
+		"types": [
+			"./html.d.ts"
+		]
+	}
 }
