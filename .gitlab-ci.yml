@@ -19,7 +19,7 @@ check:
     extends:
         - .merge-rules 
     script:
-        - deno doc --lint **/*.ts
+        - deno doc --lint ./mod.ts
         - deno task check
 
 test-publish:

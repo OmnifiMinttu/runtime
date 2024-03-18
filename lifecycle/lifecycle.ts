@@ -1,12 +1,12 @@
 import DataManager, {
 	DataSyncSubscriber,
-} from '@minttu/runtime/data/manager.ts';
-import { SyncRule } from '@minttu/runtime/data/manager.ts';
-import { EnvironmentMiddleware } from '@minttu/runtime/environment/mod.ts';
+} from '../data/manager.ts';
+import { SyncRule } from '../data/manager.ts';
+import { EnvironmentMiddleware } from '../environment/mod.ts';
 import AssetsController from '../cache/controller.ts';
 import ApplicationController, {
 	ApplicationOptions,
-} from '@minttu/runtime/application/controller.ts';
+} from '../application/controller.ts';
 
 /**
  * A request structure for synchronization rules of local data storage.

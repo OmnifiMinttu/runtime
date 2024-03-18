@@ -1,4 +1,4 @@
-import ConfigurationStore from '@minttu/runtime/configuration/store.ts';
+import ConfigurationStore from '../store.ts';
 import { resolve } from '$std/path/mod.ts';
 import { WebManifest } from './webmanifest.ts';
 
