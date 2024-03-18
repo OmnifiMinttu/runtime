@@ -2,7 +2,7 @@ workflow:
     name: Deno testing
 
 default:               
-    image: deno
+    image: denoland/deno
 
 .merge-rules:       
     rules:
