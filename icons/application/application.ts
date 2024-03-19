@@ -1,5 +1,5 @@
-import * as filesystem from '$std/fs/mod.ts';
-import { join } from '$std/path/mod.ts';
+import * as filesystem from '@std/fs';
+import { join } from '@std/path';
 import { defaultApplicationIconsPath } from '../environment.ts';
 
 import { WebIconDescriptor } from '../icon.ts';

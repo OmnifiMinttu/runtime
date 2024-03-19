@@ -1,4 +1,4 @@
-import { basename, extname, resolve } from '$std/path/mod.ts';
+import { basename, extname, resolve } from '@std/path';
 import { ConfigurationStore } from '../configuration/mod.ts';
 import Navigation, { NavigationItem } from './navigation.ts';
 

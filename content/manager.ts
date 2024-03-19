@@ -1,6 +1,6 @@
-import { basename, dirname, extname, resolve } from '$std/path/mod.ts';
+import { basename, dirname, extname, resolve } from '@std/path';
 import { Content } from './content.ts';
-import { extract } from '$std/front_matter/any.ts';
+import { extract } from '@std/front-matter/any';
 import { ImageSourceMap, parseImageMap } from './image.ts';
 
 /**

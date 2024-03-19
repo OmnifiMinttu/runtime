@@ -1,5 +1,5 @@
-import { copy, exists, existsSync } from '$std/fs/mod.ts';
-import { resolve } from '$std/path/mod.ts';
+import { copy, exists, existsSync } from '@std/fs';
+import { resolve } from '@std/path';
 
 /**
  * Synchronization rule for replicating external content into a local data store.

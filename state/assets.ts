@@ -1,4 +1,4 @@
-import { encodeHex } from '$std/encoding/hex.ts';
+import { encodeHex } from '@std/encoding/hex';
 import Hashes from '../cache/hashes.ts';
 
 /**

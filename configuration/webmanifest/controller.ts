@@ -1,5 +1,5 @@
 import ConfigurationStore from '../store.ts';
-import { resolve } from '$std/path/mod.ts';
+import { resolve } from '@std/path';
 import { WebManifest } from './webmanifest.ts';
 
 /**

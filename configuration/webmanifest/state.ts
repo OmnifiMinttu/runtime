@@ -1,4 +1,4 @@
-import { resolve } from '$std/path/mod.ts';
+import { resolve } from '@std/path';
 import { ConfigurationStore } from '../store.ts';
 import { WebManifest } from './webmanifest.ts';
 

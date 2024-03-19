@@ -1,7 +1,7 @@
-import { debounce } from '$std/async/mod.ts';
-import { basename, extname } from '$std/path/mod.ts';
-import { relative, resolve } from '$std/path/mod.ts';
-import { copy } from '$std/fs/mod.ts';
+import { debounce } from '@std/async';
+import { basename, extname } from '@std/path';
+import { relative, resolve } from '@std/path';
+import { copy } from '@std/fs';
 import browserslist from 'browserslist';
 import { build as esbuild } from 'esbuild/mod.js';
 import init, { browserslistToTargets, transform } from 'lightningcss';

@@ -1,5 +1,6 @@
-import { existsSync } from '$std/fs/mod.ts';
-import { resolve } from '$std/path/mod.ts';
+import { existsSync } from '@std/fs';
+import { resolve } from '@std/path';
+
 import {
 	configurationPathVariable,
 	defaultConfigurationPath,
